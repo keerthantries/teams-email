@@ -29,9 +29,69 @@ export default async function handler(req, res) {
       from: process.env.SMTP_USER,
       to: process.env.TO_EMAIL,
       subject: `Contact from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\n\n${message}`,
       replyTo: email,
+      html: `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>New Contact Form Submission</title>
+      <style>
+        body {
+          font-family: 'Segoe UI', sans-serif;
+          background-color: #f4f6f8;
+          margin: 0;
+          padding: 20px;
+        }
+        .container {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 30px;
+          max-width: 600px;
+          margin: auto;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        h2 {
+          color: #333333;
+        }
+        .info {
+          margin: 20px 0;
+          line-height: 1.6;
+          color: #555555;
+        }
+        .label {
+          font-weight: bold;
+          color: #222222;
+        }
+        .footer {
+          margin-top: 30px;
+          font-size: 0.9em;
+          color: #888888;
+          text-align: center;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h2>📬 New Contact Form Submission</h2>
+        <div class="info">
+          <p><span class="label">Name:</span> ${name}</p>
+          <p><span class="label">Email:</span> ${email}</p>
+          <p><span class="label">Phone:</span> ${phone || 'N/A'}</p>
+          <p><span class="label">Company:</span> ${company || 'N/A'}</p>
+          <p><span class="label">Subject:</span> ${subject || 'General Inquiry'}</p>
+          <p><span class="label">Message:</span><br>${message}</p>
+        </div>
+        <div class="footer">
+          Submitted on ${timestamp}<br>
+          — ${websiteName} Team
+        </div>
+      </div>
+    </body>
+    </html>
+  `
     });
+
 
     await transporter.sendMail({
       from: process.env.SMTP_USER,
