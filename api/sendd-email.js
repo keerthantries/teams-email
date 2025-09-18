@@ -24,6 +24,7 @@ export default async function handler(req, res) {
         pass: process.env.SMTP_PASS,
       },
     });
+const subject = `Contact from ${name}`;
 
     await transporter.sendMail({
       from: process.env.SMTP_USER,
