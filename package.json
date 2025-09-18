@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/keerthantries/form-using-vercel/issues"
   },
-  "homepage": "https://github.com/keerthantries/form-using-vercel#readme"
+  "homepage": "https://github.com/keerthantries/form-using-vercel#readme",
+  "dependencies": {
+    "nodemailer": "^6.9.4"
+  }
 }
