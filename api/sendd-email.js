@@ -1,11 +1,11 @@
 import nodemailer from 'nodemailer';
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*'); // or use 'http://127.0.0.1:5501' for stricter control
+  res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5502'); // or use 'http://127.0.0.1:5501' for stricter control
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') {
-  return res.status(200).end();
+    return res.status(200).end();
   }
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
   if (!process.env.SMTP_USER || !process.env.SMTP_PASS || !process.env.TO_EMAIL) {
     console.error('Missing SMTP credentials');
     return res.status(500).json({ error: 'Email configuration error' });
-  } 
+  }
 
   try {
     const transporter = nodemailer.createTransport({
