@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5502'); // or use 'http://127.0.0.1:5501' for stricter control
+  res.setHeader('Access-Control-Allow-Origin', '*'); // or use 'http://127.0.0.1:5501' for stricter control
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') {
