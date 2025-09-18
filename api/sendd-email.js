@@ -78,13 +78,12 @@ export default async function handler(req, res) {
           <p><span class="label">Name:</span> ${name}</p>
           <p><span class="label">Email:</span> ${email}</p>
           <p><span class="label">Phone:</span> ${phone || 'N/A'}</p>
-          <p><span class="label">Company:</span> ${company || 'N/A'}</p>
           <p><span class="label">Subject:</span> ${subject || 'General Inquiry'}</p>
           <p><span class="label">Message:</span><br>${message}</p>
         </div>
         <div class="footer">
-          Submitted on ${timestamp}<br>
-          — ${websiteName} Team
+          Submitted on ${new date()}<br>
+          — Vsaas Technologies Team
         </div>
       </div>
     </body>
