@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/keerthantries/form-using-vercel#readme",
   "dependencies": {
-    "nodemailer": "^6.9.4"
+    "nodemailer": "^6.10.1"
   }
 }

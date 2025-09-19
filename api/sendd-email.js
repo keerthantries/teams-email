@@ -7,7 +7,6 @@ export default async function handler(req, res) {
 
   const { name, email, message } = req.body;
 
-  // Log which environment variables are loaded
   const envCheck = {
     EMAIL_USER: !!process.env.EMAIL_USER,
     CLIENT_ID: !!process.env.CLIENT_ID,
@@ -17,7 +16,6 @@ export default async function handler(req, res) {
   };
   console.log('SMTP ENV CHECK:', envCheck);
 
-  // If any env variable is missing, return early
   if (Object.values(envCheck).includes(false)) {
     return res.status(500).json({
       success: false,

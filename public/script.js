@@ -7,12 +7,26 @@ document.getElementById('contactForm').addEventListener('submit', async function
     message: this.message.value
   };
 
-  const response = await fetch('/api/sendd-email', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData)
-  });
+  try {
+    const response = await fetch('/api/sendd-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
 
-  const result = await response.json();
-  alert(result.message);
+    const contentType = response.headers.get('content-type');
+    let result;
+
+    if (contentType && contentType.includes('application/json')) {
+      result = await response.json();
+    } else {
+      const text = await response.text();
+      throw new Error(`Server returned non-JSON: ${text}`);
+    }
+
+    alert(result.message);
+  } catch (err) {
+    console.error('Response parsing error:', err);
+    alert('Something went wrong. Please try again later.');
+  }
 });
